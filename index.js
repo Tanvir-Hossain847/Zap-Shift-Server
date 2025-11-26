@@ -33,6 +33,16 @@ async function run() {
     const zap_shift = client.db("zap_shift")
     const collection = zap_shift.collection("parcel")
 
+
+    app.get('/parcelInfo', async(req, res) =>{
+        const query = {}
+
+
+        const cursor = collection.find(query)
+        const result= await cursor.toArray()
+        res.send(result)
+    })
+
     app.post('/parcelInfo', async(req, res) => {
         const newParcel = req.body;
         const result = await collection.insertOne(newParcel)
